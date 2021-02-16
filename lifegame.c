@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
 #include <windows.h>
 
 #define WIDTH 10
 #define HEIGHT 10
 
-// todo: copy
 int FIELD[HEIGHT][WIDTH];
 
 void display(void);
@@ -18,7 +18,7 @@ int main(void) {
     display();
     while(1) {
         evolve();
-        Sleep(1000);
+        Sleep(5000);
         display();
     }
     return 0;
@@ -43,10 +43,14 @@ void initialize(void) {
 }
 
 void evolve(void) {
+    int tmp[HEIGHT][WIDTH];
     for (int row = 0; row < HEIGHT; row++) {
         for (int column = 0; column < WIDTH; column++) {
-            FIELD[row][column] = is_alive(row, column);
+            tmp[row][column] = is_alive(row, column);
         }
+    }
+    for (int row = 0; row < HEIGHT; row++) {
+        memcpy(FIELD[row], tmp[row], sizeof(int)*WIDTH);
     }
 }
 
