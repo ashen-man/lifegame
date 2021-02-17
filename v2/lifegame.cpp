@@ -25,6 +25,7 @@ void evolve(rectangle field) {
 }
 
 bool is_alive(rectangle field, size_t row, size_t column) {
+
     uint8_t count = 0;
 
     size_t lower = row == HEIGHT-1 ? 0 : row+1;
@@ -42,7 +43,6 @@ bool is_alive(rectangle field, size_t row, size_t column) {
         {lower, column},
         {lower, right}
     };
-
     for (size_t i = 0; i < 8; i++) {
         if (field[neighbors[i][0]][neighbors[i][1]]) {
             count++;
@@ -64,3 +64,4 @@ void display(rectangle field) {
     }
     std::endl(std::cout);
 }
+
